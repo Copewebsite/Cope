@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>$COPE – Built to Stay</title>
     <link rel="stylesheet" href="style.css">
-
-    <!-- SOCIAL ICON LIBRARY -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -14,14 +12,17 @@
 <header class="main-header">
     <div class="container nav-container">
         <div class="brand">$COPE</div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#vision">Vision</a></li>
-                <li><a href="#community">Community</a></li>
-                <li><a href="#buy" class="nav-btn">Buy Now</a></li>
-            </ul>
-        </nav>
+
+        <!-- DROPDOWN MENU -->
+        <div class="dropdown">
+            <button class="dropbtn" id="menu-btn">☰</button>
+            <div class="dropdown-content" id="dropdown-menu">
+                <a href="#about">About</a>
+                <a href="#vision">Vision</a>
+                <a href="#community">Community</a>
+                <a href="#buy" class="nav-btn">Buy Now</a>
+            </div>
+        </div>
     </div>
 </header>
 
@@ -36,11 +37,7 @@
 
 <section id="about" class="section">
     <h2>What is $COPE?</h2>
-    <p>
-        $COPE is a memecoin created by people who are tired of being exit liquidity.
-        No fake promises. No disappearing devs. No liquidity games.
-        Just a long-term vision in a space full of short-term plays.
-    </p>
+    <p>$COPE is a memecoin created by people who are tired of being exit liquidity. No fake promises. No disappearing devs. No liquidity games. Just a long-term vision in a space full of short-term plays.</p>
 </section>
 
 <section id="vision" class="section dark">
@@ -63,18 +60,10 @@
 
 <section id="community" class="section">
     <h2>Powered by the Community</h2>
-    <p>
-        While others chase quick pumps, $COPE focuses on stability,
-        transparency, and real community strength.
-    </p>
-
+    <p>While others chase quick pumps, $COPE focuses on stability, transparency, and real community strength.</p>
     <div class="socials">
-        <a href="https://x.com/devofcope?s=21" target="_blank" class="social-icon">
-            <i class="fab fa-x-twitter"></i>
-        </a>
-        <a href="https://t.me/+cxzKbFlo3rZmZDI8" target="_blank" class="social-icon">
-            <i class="fab fa-telegram-plane"></i>
-        </a>
+        <a href="https://x.com/devofcope?s=21" target="_blank" class="social-icon"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://t.me/+cxzKbFlo3rZmZDI8" target="_blank" class="social-icon"><i class="fab fa-telegram-plane"></i></a>
     </div>
 </section>
 
@@ -90,22 +79,34 @@
 </section>
 
 <footer>
-    <p>© 2026 $COPE. Built to Stay.</p>
+    <p>©️ 2026 $COPE. Built to Stay.</p>
 </footer>
 
-<!-- SCRIPTS -->
 <script>
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
     });
 });
 
-const sections = document.querySelectorAll('.section, .card');
+// Dropdown
+const menuBtn = document.getElementById("menu-btn");
+const dropdownMenu = document.getElementById("dropdown-menu");
 
+menuBtn.addEventListener("click", () => {
+    dropdownMenu.classList.toggle("show");
+});
+
+window.addEventListener("click", function(e) {
+    if (!e.target.closest('.dropdown')) {
+        dropdownMenu.classList.remove('show');
+    }
+});
+
+// Reveal animation
+const sections = document.querySelectorAll('.section, .card');
 const reveal = () => {
     sections.forEach(sec => {
         const top = sec.getBoundingClientRect().top;
@@ -115,52 +116,14 @@ const reveal = () => {
         }
     });
 };
-
 sections.forEach(sec => {
     sec.style.opacity = 0;
     sec.style.transform = "translateY(40px)";
     sec.style.transition = "all 0.6s ease";
 });
-
 window.addEventListener('scroll', reveal);
 reveal();
 </script>
-<script>
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
 
-const sections = document.querySelectorAll('.section, .card');
-
-const reveal = () => {
-    sections.forEach(sec => {
-        const top = sec.getBoundingClientRect().top;
-        if (top < window.innerHeight - 100) {
-            sec.style.opacity = 1;
-            sec.style.transform = "translateY(0)";
-        }
-    });
-};
-
-sections.forEach(sec => {
-    sec.style.opacity = 0;
-    sec.style.transform = "translateY(40px)";
-    sec.style.transition = "all 0.6s ease";
-});
-
-window.addEventListener('scroll', reveal);
-reveal();
-
-/* Header glow on scroll */
-window.addEventListener("scroll", () => {
-  const header = document.querySelector(".main-header");
-  header.classList.toggle("scrolled", window.scrollY > 50);
-});
-</script>
 </body>
 </html>
